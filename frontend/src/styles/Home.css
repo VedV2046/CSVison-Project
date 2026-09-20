@@ -1,0 +1,19 @@
+.hero-section {
+    height: auto;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+.hero-section h1{
+    color: rgb(0, 43, 121);
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+.hero-section{
+    color: #94a3b8;
+    font-size: 1.5rem;
+}
