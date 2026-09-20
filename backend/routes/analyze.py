@@ -4,6 +4,8 @@ import io
 import matplotlib.pyplot as plt
 import base64
 from io import BytesIO
+from database import uploads_collection
+from datetime import datetime
 
 
 router = APIRouter()
@@ -33,6 +35,15 @@ async def analyze_csv(file: UploadFile = File(...)):
         buffer.seek(0)
         charts[col] = base64.b64encode(buffer.read()).decode('utf-8')
         plt.close()
+
+        #MongoDB saving
+        uploads_collection.insert_one({
+            "filename": file.filename,
+            "rows": rows,
+            "columns": columns,
+            "column_names": column_names,
+            "uploaded_at": datetime.utcnow()
+        })
 
     return {
         "rows": rows,
