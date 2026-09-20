@@ -52,3 +52,8 @@ async def analyze_csv(file: UploadFile = File(...)):
         "stats": stats,
         "charts": charts
     }
+
+@router.get("/history")
+async def get_history():
+    uploads = list(uploads_collection.find({}, {"_id":0}).sort("uploaded_at", -1).limit(10))
+    return {"history": uploads}
