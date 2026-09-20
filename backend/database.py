@@ -1,6 +1,14 @@
+import os
+from pathlib import Path
+
+from dotenv import load_dotenv
 from pymongo import MongoClient
 
-MONGO_URL = "mongodb+srv://vharambleved_db_user:dz9ypDb4VN7QPlve@cluster0.xdjsz3q.mongodb.net/?appName=Cluster0"
+load_dotenv(Path(__file__).with_name(".env"))
+
+MONGO_URL = os.getenv("MONGO_URL")
+if not MONGO_URL:
+	raise RuntimeError("MONGO_URL is not configured")
 
 client = MongoClient(MONGO_URL)
 db = client["csvision"]
