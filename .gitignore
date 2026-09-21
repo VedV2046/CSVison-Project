@@ -6,6 +6,7 @@ backend/.env
 frontend/.env
 frontend/.env.*
 !frontend/.env.example
+docker-compose.yml
 
 # Python
 __pycache__/

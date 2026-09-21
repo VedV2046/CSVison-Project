@@ -37,13 +37,16 @@ async def analyze_csv(file: UploadFile = File(...)):
         plt.close()
 
         #MongoDB saving
-        uploads_collection.insert_one({
-            "filename": file.filename,
-            "rows": rows,
-            "columns": columns,
-            "column_names": column_names,
-            "uploaded_at": datetime.utcnow()
-        })
+        try: 
+            uploads_collection.insert_one({
+                "filename": file.filename,
+                "rows": rows,
+                "columns": columns,
+                "column_names": column_names,
+                "uploaded_at": datetime.utcnow()
+            })
+        except Exception as e: 
+            print(f"MongoDB error: {e}")
 
     return {
         "rows": rows,
