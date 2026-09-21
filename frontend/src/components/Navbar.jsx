@@ -8,8 +8,8 @@ function Navbar() {
         <nav className="navbar">
             <div className="logo-container">
                 <img src={Logo} className="logo" alt="CSVision Logo" />
-                <Link to="/history">History</Link>
             </div>
+            <Link to="/history" className="history-link">History</Link>
         </nav>
     )
 }

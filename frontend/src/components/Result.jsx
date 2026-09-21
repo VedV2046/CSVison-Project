@@ -14,6 +14,8 @@ function Result({results}) {
 
     return (
         <div className="results">
+            <h1>DATA OVERVIEW</h1>
+            <hr></hr>
             <div className="results-container">
                 <div className="cards">
                     <p>Total Rows: {results.rows}</p>
@@ -21,16 +23,7 @@ function Result({results}) {
                 <div className="cards">
                     <p>Total Columns: {results.columns}</p>
                 </div>
-                <div className="cards">
-                    <div className="column-names">
-                        <p>Column Names:</p>
-                        <ul>
-                            {results.column_names.map((columnName) => (
-                                <li key={columnName}>{columnName}</li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
+                
                 <div className="cards">
                     <p>Numeric Columns: {Object.keys(results.stats).length}</p>
                 </div>

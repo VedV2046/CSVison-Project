@@ -1,12 +1,19 @@
 .navbar {
     width: 100%;
     height: auto;
-    background-color: white;
+    background-color:#FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 50px;
 }
-
+.history-link{
+    color: black;
+    text-decoration: none;
+}
 .logo-container{
-    height: 100px;
-    width: 200px;
+    height: 80px;
+    width: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
