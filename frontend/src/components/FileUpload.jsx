@@ -22,7 +22,7 @@ function FileUpload({onResults}) {
         const formData = new FormData();
         formData.append("file", file);
 
-        const response = await axios.post("http://localhost:8000/analyze", formData)
+        const response = await axios.post("https://csvison-project.onrender.com/analyze", formData)
         console.log(response.data);
         onResults(response.data);
         setLoading(false);
