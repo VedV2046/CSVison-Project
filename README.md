@@ -2,6 +2,10 @@
 
 A full-stack CSV analyzer that generates instant stats, charts, and insights from any CSV file.
 
+## Live Demo
+
+🔗 [Live App](https://your-live-url-here.com)
+
 ## Features
 
 - 📁 Upload any CSV file
@@ -34,9 +38,7 @@ cd csvision
 docker-compose up --build
 ```
 
-- Frontend: http://localhost:5173
-- Backend: http://localhost:8000
-- API Docs: http://localhost:8000/docs
+Once running, open http://localhost:5173 in your browser.
 
 ### Run locally (without Docker)
 
@@ -62,16 +64,44 @@ Create a `.env` file in the backend folder:
 
 
 ## Project Structure
+
+```
 csvision/
-├── frontend/ # React app
-│ ├── src/
-│ │ ├── components/
-│ │ ├── pages/
-│ │ └── styles/
-│ └── Dockerfile
-├── backend/ # FastAPI app
-│ ├── routes/
-│ ├── main.py
-│ ├── database.py
-│ └── Dockerfile
-└── docker-compose.yml
+├── backend/
+│   ├── routes/
+│   │   ├── __init__.py
+│   │   └── analyze.py
+│   ├── Dockerfile
+│   ├── requirements.txt
+│   ├── main.py
+│   ├── database.py
+│   └── .env.example
+├── frontend/
+│   ├── src/
+│   │   ├── assets/
+│   │   │   └── CSVison-Logo.png
+│   │   ├── components/
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── FileUpload.jsx
+│   │   │   └── Result.jsx
+│   │   ├── pages/
+│   │   │   ├── Home.jsx
+│   │   │   └── History.jsx
+│   │   ├── styles/
+│   │   │   ├── Navbar.css
+│   │   │   ├── Home.css
+│   │   │   ├── FileUpload.css
+│   │   │   ├── Result.css
+│   │   │   └── History.css
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   └── index.css
+│   ├── public/
+│   ├── index.html
+│   ├── package.json
+│   ├── vite.config.js
+│   └── Dockerfile
+├── docker-compose.yml
+├── .gitignore
+└── README.md
+```
