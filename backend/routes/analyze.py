@@ -25,19 +25,32 @@ async def analyze_csv(file: UploadFile = File(...)):
         if numeric_df[col].dropna().empty:
             continue
         
-        plt.figure(figsize=(8,4))
+        figure, axis = plt.subplots(figsize=(8, 4))
         unique_ratio = numeric_df[col].nunique() / len(numeric_df[col])
-        if unique_ratio > 0.5:
-            numeric_df[col].plot(kind='hist', bins=10)
-            plt.title(f'Distribution of {col}')
+        if unique_ratio > 0.3:
+            axis.hist(
+                numeric_df[col].dropna(),
+                bins=8,
+                edgecolor='black',
+                linewidth=1.5,
+                rwidth=0.85,
+            )
+            axis.set_title(f'Distribution of {col}')
         else: 
-            numeric_df[col].value_counts().head(10).plot(kind='bar')    
-            plt.title(f"Top 10 values for {col}")
+            numeric_df[col].value_counts().head(10).plot(
+                kind='bar',
+                ax=axis,
+                edgecolor='black',
+                linewidth=1.5,
+            )
+            axis.set_title(f"Top 10 values for {col}")
 
-        plt.tight_layout()
+        axis.set_xlabel(col)
+
+        figure.tight_layout()
 
         buffer = BytesIO()
-        plt.savefig(buffer, format='png')
+        figure.savefig(buffer, format='png')
         buffer.seek(0)
         charts[col] = base64.b64encode(buffer.read()).decode('utf-8')
         plt.close()
