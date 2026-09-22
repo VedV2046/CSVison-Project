@@ -29,6 +29,7 @@ function Result({results}) {
                 </div>
             </div>
 
+            <h5 className="stats">Statistical Summary</h5>
             <table className="stats-table">
                 <thead>
                     <tr>
@@ -52,11 +53,12 @@ function Result({results}) {
                 </tbody>
             </table>
 
-            <div className="charts-grid">
+            <h5 className="stats">Distributions</h5>
+            <div className="charts-grid">             
                 {Object.entries(results.charts).map(([colName, chartData]) => (
                     <div key={colName} className="chart-container">
-                        <h3>{colName}</h3>
-                        <img src={`data:image/png;base64,${chartData}`} alt={colName} onClick={() => setSelectedChart({name: colName, data: chartData})} style={{cursor: "pointer"}}/>
+                        <h5>{colName}</h5>
+                        <img src={`data:image/png;base64,${chartData}`} alt={colName} onClick={() => setSelectedChart({name: colName, data: chartData})} style={{cursor: "pointer"}} />
                     </div>
                 ))}
             </div>    

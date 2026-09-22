@@ -26,8 +26,14 @@ async def analyze_csv(file: UploadFile = File(...)):
             continue
         
         plt.figure(figsize=(8,4))
-        numeric_df[col].value_counts().head(10).plot(kind="bar")
-        plt.title(f"Top 10 values for {col}")
+        unique_ratio = numeric_df[col].nunique() / len(numeric_df[col])
+        if unique_ratio > 0.5:
+            numeric_df[col].plot(kind='hist', bins=10)
+            plt.title(f'Distribution of {col}')
+        else: 
+            numeric_df[col].value_counts().head(10).plot(kind='bar')    
+            plt.title(f"Top 10 values for {col}")
+
         plt.tight_layout()
 
         buffer = BytesIO()
@@ -36,17 +42,17 @@ async def analyze_csv(file: UploadFile = File(...)):
         charts[col] = base64.b64encode(buffer.read()).decode('utf-8')
         plt.close()
 
-        #MongoDB saving
-        try: 
-            uploads_collection.insert_one({
-                "filename": file.filename,
-                "rows": rows,
-                "columns": columns,
-                "column_names": column_names,
-                "uploaded_at": datetime.utcnow()
-            })
-        except Exception as e: 
-            print(f"MongoDB error: {e}")
+    #MongoDB saving
+    try: 
+        uploads_collection.insert_one({
+            "filename": file.filename,
+            "rows": rows,
+            "columns": columns,
+            "column_names": column_names,
+            "uploaded_at": datetime.utcnow()
+        })
+    except Exception as e: 
+        print(f"MongoDB error: {e}")
 
     return {
         "rows": rows,
